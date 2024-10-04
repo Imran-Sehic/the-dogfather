@@ -1,4 +1,4 @@
-export type ResponseType = {
+export type ResponseRecordType = {
   id: string;
   breeds: DogType[];
   url: string;

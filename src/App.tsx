@@ -5,6 +5,7 @@ import {
   Routes,
 } from "react-router-dom";
 import "./App.css";
+import { UserProvider, useUser } from "./context-providers/UserContext";
 import { AboutUs } from "./views/AboutUs";
 import { DislikedListing } from "./views/DislikedListing";
 import { LikedListing } from "./views/LikedListing";
@@ -12,7 +13,7 @@ import { Login } from "./views/Login";
 import { MainListing } from "./views/MainListing";
 
 const App: React.FC = () => {
-  const username = localStorage.getItem("username");
+  const { username } = useUser();
 
   return (
     <Router>
@@ -33,4 +34,12 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default function AppWrapper() {
+  return (
+    <UserProvider>
+      <App />
+    </UserProvider>
+  );
+}
+
+
