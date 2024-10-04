@@ -1,3 +1,9 @@
+import { MainLayout } from "../layouts/MainLayout";
+
 export const LikedListing: React.FC = () => {
-  return <div>Liked Listing</div>;
+  return (
+    <MainLayout>
+      <div>Liked Listing</div>
+    </MainLayout>
+  );
 };

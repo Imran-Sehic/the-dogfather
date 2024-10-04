@@ -1,3 +1,9 @@
+import { MainLayout } from "../layouts/MainLayout";
+
 export const AboutUs: React.FC = () => {
-  return <div>About Us</div>;
+  return (
+    <MainLayout>
+      <div>About Us</div>
+    </MainLayout>
+  );
 };

@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         custom: ["Lobster", "cursive"],
+        rubik: ["Rubik", "sans-serif"],
       },
     },
   },
