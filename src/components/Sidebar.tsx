@@ -37,10 +37,12 @@ export const Sidebar: React.FC<SidebarInterface> = ({
       <div className="flex gap-2 border-b p-3">
         <UserCircleIcon className="w-4" />
         <p>{username}</p>
-        <XMarkIcon
-          className="w-4 ml-auto text-white"
-          onClick={() => setIsOpen(false)}
-        />
+        {isMobile && (
+          <XMarkIcon
+            className="w-4 ml-auto text-white"
+            onClick={() => setIsOpen(false)}
+          />
+        )}
       </div>
       <div className="flex flex-col gap-3 pt-5 text-xl">
         <Link

@@ -31,7 +31,7 @@ export const ListingCard: React.FC<ListingCardInterface> = ({
 
   return (
     <div
-      className="border-b-2 border-b-blue-400 p-2 shadow-xl cursor-pointer transition rounded-t hover:bg-blue-100"
+      className="border border-b-2 border-b-blue-400 p-2 shadow-xl cursor-pointer transition rounded-t hover:bg-blue-100"
       onClick={() => setShowPersonalities(!showPersonalities)}
     >
       <div className="flex items-start gap-2">

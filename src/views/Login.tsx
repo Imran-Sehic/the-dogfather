@@ -10,7 +10,7 @@ export const Login: React.FC = () => {
   return (
     <div className="flex h-[100vh] justify-center items-center">
       <div className="flex flex-col items-center">
-        <div className="flex flex-col mb-20 items-center">
+        <div className="flex flex-col mb-20 text-center items-center">
           <h1 className="text-5xl mb-2 font-custom text-blue-400">
             The Dogfather
           </h1>
