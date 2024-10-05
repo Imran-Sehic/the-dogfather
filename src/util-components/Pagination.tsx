@@ -26,7 +26,7 @@ export const Pagination: React.FC<PaginationInterface> = ({
           if (page > 1) setPage((prev) => prev - 1);
         }}
       />
-      <div className="p-2 w-7 h-7 flex items-center justify-center rounded-[50%] bg-blue-300 text-white">
+      <div className="p-2 w-7 h-7 flex items-center justify-center rounded-full bg-blue-300 text-white">
         {page}
       </div>
       <ChevronDoubleRightIcon

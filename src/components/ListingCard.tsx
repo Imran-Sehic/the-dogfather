@@ -28,6 +28,7 @@ export const ListingCard: React.FC<ListingCardInterface> = ({
   const [showPersonalities, setShowPersonalities] = useState(false);
   const [isLikedState, setIsLikedState] = useState(isLiked);
   const [isDislikedState, setIsDislikedState] = useState(isDisliked);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   return (
     <div
@@ -35,7 +36,17 @@ export const ListingCard: React.FC<ListingCardInterface> = ({
       onClick={() => setShowPersonalities(!showPersonalities)}
     >
       <div className="flex items-start gap-2">
-        <img src={breed.url} className="w-[50px] h-[50px] rounded-[50%] mr-5" />
+        {!isImageLoaded && (
+          <div className="w-[50px] h-[50px] rounded-full animate-shimmer mr-5 bg-blue-200 bg-gradient-to-r from-blue-200 via-blue-100 to-blue-200 bg-[length:200%_100%]"></div>
+        )}
+        <img
+          src={breed.url}
+          alt={`image_for_${breed.breeds[0].name}`}
+          onLoad={() => setIsImageLoaded(true)}
+          className={`${
+            isImageLoaded ? "block" : "hidden"
+          } w-[50px] h-[50px] rounded-full mr-5`}
+        />
         <div className="flex flex-col">
           <div className="flex gap-2">
             <p className="font-bold text-blue-400">{breed.breeds[0].name}</p>
