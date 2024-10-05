@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { apiKey } from "../constants";
+import { apiKey, paginationLimit } from "../constants";
 import { ResponseRecordType } from "../types";
 
 const fetchDogs = async (page: number): Promise<ResponseRecordType[]> => {
   const res = await axios.get(
-    `https://api.thedogapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=${page}&limit=10`,
+    `https://api.thedogapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=${page}&limit=${paginationLimit}`,
     {
       headers: {
         "Content-Type": "application/json",
