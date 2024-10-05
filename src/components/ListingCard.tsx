@@ -1,17 +1,18 @@
 import { HandThumbDownIcon, HandThumbUpIcon } from "@heroicons/react/24/solid";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import CountryFlag from "react-country-flag";
-import useTailwindBreakpoint from "../hooks/useTailwindBreakpoints";
 import { ResponseRecordType } from "../types";
 
 interface ListingCardInterface {
   breed: ResponseRecordType;
   isLiked: boolean;
   isDisliked: boolean;
-  localstorageDogs: {
+  dogs: {
     liked: ResponseRecordType[];
     disliked: ResponseRecordType[];
   };
+  setLikedDogs?: Dispatch<SetStateAction<ResponseRecordType[]>>;
+  setDislikedDogs?: Dispatch<SetStateAction<ResponseRecordType[]>>;
   refresh?: boolean;
 }
 
@@ -19,12 +20,11 @@ export const ListingCard: React.FC<ListingCardInterface> = ({
   breed,
   isLiked,
   isDisliked,
-  localstorageDogs,
+  dogs,
+  setDislikedDogs,
+  setLikedDogs,
   refresh,
 }) => {
-  const screenSize = useTailwindBreakpoint();
-  const isMobile = screenSize == "xs";
-
   const [showPersonalities, setShowPersonalities] = useState(false);
   const [isLikedState, setIsLikedState] = useState(isLiked);
   const [isDislikedState, setIsDislikedState] = useState(isDisliked);
@@ -84,32 +84,30 @@ export const ListingCard: React.FC<ListingCardInterface> = ({
               e.stopPropagation();
               if (isLikedState) {
                 setIsLikedState(false);
-                localStorage.setItem(
-                  "liked-dogs",
-                  JSON.stringify(
-                    localstorageDogs.liked.filter(
-                      (b) =>
-                        b.id + b.breeds[0].id != breed.id + breed.breeds[0].id
-                    )
-                  )
+                const filtered = dogs.liked.filter(
+                  (b) => b.id + b.breeds[0].id != breed.id + breed.breeds[0].id
                 );
+                localStorage.setItem("liked-dogs", JSON.stringify(filtered));
+                setLikedDogs && setLikedDogs(filtered);
               } else {
                 setIsLikedState(true);
                 localStorage.setItem(
                   "liked-dogs",
-                  JSON.stringify([...localstorageDogs.liked, breed])
+                  JSON.stringify([...dogs.liked, breed])
                 );
-                isDislikedState &&
+                setLikedDogs && setLikedDogs([...dogs.liked, breed]);
+                if (isDislikedState) {
+                  const filtered = dogs.disliked.filter(
+                    (b) =>
+                      b.id + b.breeds[0].id != breed.id + breed.breeds[0].id
+                  );
                   localStorage.setItem(
                     "disliked-dogs",
-                    JSON.stringify(
-                      localstorageDogs.disliked.filter(
-                        (b) =>
-                          b.id + b.breeds[0].id != breed.id + breed.breeds[0].id
-                      )
-                    )
+                    JSON.stringify(filtered)
                   );
-                isDislikedState && setIsDislikedState(false);
+                  setDislikedDogs && setDislikedDogs(filtered);
+                  setIsDislikedState(false);
+                }
               }
               refresh && window.location.reload();
             }}
@@ -122,32 +120,27 @@ export const ListingCard: React.FC<ListingCardInterface> = ({
               e.stopPropagation();
               if (isDislikedState) {
                 setIsDislikedState(false);
-                localStorage.setItem(
-                  "disliked-dogs",
-                  JSON.stringify(
-                    localstorageDogs.disliked.filter(
-                      (b) =>
-                        b.id + b.breeds[0].id != breed.id + breed.breeds[0].id
-                    )
-                  )
+                const filtered = dogs.disliked.filter(
+                  (b) => b.id + b.breeds[0].id != breed.id + breed.breeds[0].id
                 );
+                localStorage.setItem("disliked-dogs", JSON.stringify(filtered));
+                setDislikedDogs && setDislikedDogs(filtered);
               } else {
                 setIsDislikedState(true);
                 localStorage.setItem(
                   "disliked-dogs",
-                  JSON.stringify([...localstorageDogs.disliked, breed])
+                  JSON.stringify([...dogs.disliked, breed])
                 );
-                isLikedState &&
-                  localStorage.setItem(
-                    "liked-dogs",
-                    JSON.stringify(
-                      localstorageDogs.liked.filter(
-                        (b) =>
-                          b.id + b.breeds[0].id != breed.id + breed.breeds[0].id
-                      )
-                    )
+                setDislikedDogs && setDislikedDogs([...dogs.disliked, breed]);
+                if (isLikedState) {
+                  const filtered = dogs.liked.filter(
+                    (b) =>
+                      b.id + b.breeds[0].id != breed.id + breed.breeds[0].id
                   );
-                isLikedState && setIsLikedState(false);
+                  localStorage.setItem("liked-dogs", JSON.stringify(filtered));
+                  setLikedDogs && setLikedDogs(filtered);
+                  setIsLikedState(false);
+                }
               }
               refresh && window.location.reload();
             }}

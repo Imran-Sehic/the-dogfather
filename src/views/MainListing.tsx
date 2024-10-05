@@ -24,6 +24,10 @@ export const MainListing: React.FC = () => {
   const dislikedDogsParsed: ResponseRecordType[] =
     (dislikedDogsRaw && JSON.parse(dislikedDogsRaw)) || [];
 
+  const [likedDogsState, setLikedDogsState] = useState(likedDogsParsed);
+  const [dislikedDogsState, setDislikedDogsState] =
+    useState(dislikedDogsParsed);
+
   return (
     <MainLayout>
       <div>
@@ -56,10 +60,12 @@ export const MainListing: React.FC = () => {
                     breed={breed}
                     isLiked={isLiked != undefined}
                     isDisliked={isDisliked != undefined}
-                    localstorageDogs={{
-                      liked: likedDogsParsed,
-                      disliked: dislikedDogsParsed,
+                    dogs={{
+                      liked: likedDogsState,
+                      disliked: dislikedDogsState,
                     }}
+                    setLikedDogs={setLikedDogsState}
+                    setDislikedDogs={setDislikedDogsState}
                   />
                 );
               })}

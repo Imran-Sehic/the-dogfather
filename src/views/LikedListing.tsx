@@ -32,7 +32,7 @@ export const LikedListing: React.FC = () => {
                     breed={breed}
                     isLiked={true}
                     isDisliked={false}
-                    localstorageDogs={{
+                    dogs={{
                       liked: likedDogsParsed,
                       disliked: dislikedDogsParsed,
                     }}
