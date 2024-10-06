@@ -19,7 +19,7 @@ export const MainLayout: React.FC<React.PropsWithChildren<{}>> = ({
       }`}
     >
       <Sidebar isMobile={isMobile} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <div className="overflow-scroll h-screen flex flex-col">
+      <div className="overflow-auto h-screen flex flex-col">
         <Header isMobile={isMobile} setIsOpen={setIsOpen} />
         <div>{children}</div>
         <Footer />
