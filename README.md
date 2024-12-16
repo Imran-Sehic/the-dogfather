@@ -29,4 +29,4 @@ The project structure is as follows:
 ## Starting the app
 
 Prior to starting the app you have to install the needed packages for the app itself by running the command `npm install` and then you can start the app by using the `npm start` command and it will be available locally at the `3000` port.
-PS. When on login page enter any username to get access to the listing.
+PS. When on login page enter any username to get access to the listing. The login page is just for presentational purpose.
